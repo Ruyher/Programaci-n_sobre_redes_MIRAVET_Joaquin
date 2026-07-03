@@ -333,5 +333,3 @@ hilo_escribir.start()
 Explicacion:
 
 El cliente crea dos hilos independientes. Uno permanece escuchando continuamente los mensajes enviados por el servidor, mientras que el otro permite al usuario escribir nuevos mensajes. Gracias a esta separación, el cliente puede enviar y recibir información simultáneamente sin que una tarea bloquee a la otra.
-
-
