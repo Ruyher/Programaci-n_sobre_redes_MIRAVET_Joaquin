@@ -16,7 +16,7 @@ import requests
 
 Explicacion:
 
-Se importan las librerías necesarias para el funcionamiento del servidor. `socket` permite establecer la comunicación mediante el protocolo TCP/IP, `threading` posibilita atender varios clientes de forma simultánea mediante hilos de ejecución y `requests` se utiliza para realizar consultas HTTP a una API pública, incorporando información externa al chat.
+Se importan las librerías necesarias para el funcionamiento del servidor. `socket` permite establecer la comunicación mediante el protocolo TCP/IP, threading posibilita atender varios clientes de forma simultánea mediante hilos de ejecución y `requests` se utiliza para realizar consultas HTTP a una API pública, incorporando información externa al chat.
 
 
 Configuración del servidor
@@ -31,7 +31,7 @@ usuarios = {}
 
 Explicacion:
 
-Se define la dirección IP y el puerto donde el servidor escuchará las conexiones entrantes. La dirección `0.0.0.0` indica que aceptará conexiones desde cualquier interfaz de red disponible. Además, se inicializan dos estructuras de datos: una lista para almacenar todos los clientes conectados y un diccionario que relaciona cada socket con el nickname del usuario correspondiente.
+Se define la dirección IP y el puerto donde el servidor escuchará las conexiones entrantes. La dirección 0.0.0.0 indica que aceptará conexiones desde cualquier interfaz de red disponible. Además, se inicializan dos estructuras de datos: una lista para almacenar todos los clientes conectados y un diccionario que relaciona cada socket con el nickname del usuario correspondiente.
 
 
 Función broadcast()
@@ -48,7 +48,7 @@ def broadcast(mensaje, remitente):
 
 Explicacion:
 
-Esta función implementa el envío masivo de mensajes (broadcast). Recorre la lista de clientes conectados y envía el mensaje a todos ellos, excepto al cliente que lo originó. Antes del envío, el mensaje se convierte a bytes mediante `encode()`, ya que los sockets únicamente transmiten datos binarios. Si algún cliente presenta un error durante el envío, la excepción es ignorada para evitar que el servidor deje de funcionar.
+Esta función implementa el envío masivo de mensajes (broadcast). Recorre la lista de clientes conectados y envía el mensaje a todos ellos, excepto al cliente que lo originó. Antes del envío, el mensaje se convierte a bytes mediante encode(), ya que los sockets únicamente transmiten datos binarios. Si algún cliente presenta un error durante el envío, la excepción es ignorada para evitar que el servidor deje de funcionar.
 
 
 Inicio de la función manejar_cliente()
@@ -64,7 +64,7 @@ def manejar_cliente(cliente):
 
 Explicacion:
 
-Esta función administra toda la comunicación con un cliente específico. Al conectarse, el servidor solicita un nickname, recibe la respuesta mediante `recv()`, la convierte a texto utilizando `decode()` y almacena la asociación entre el socket del cliente y su nombre dentro del diccionario de usuarios. De esta forma el servidor podrá identificar posteriormente quién envía cada mensaje.
+Esta función administra toda la comunicación con un cliente específico. Al conectarse, el servidor solicita un nickname, recibe la respuesta mediante recv(), la convierte a texto utilizando decode() y almacena la asociación entre el socket del cliente y su nombre dentro del diccionario de usuarios. De esta forma el servidor podrá identificar posteriormente quién envía cada mensaje.
 
 
 Notificación de conexión
@@ -77,7 +77,7 @@ broadcast(f"{nickname} se ha unido al chat.", cliente)
 
 Explicacion:
 
-Una vez autenticado el usuario, el servidor informa por consola que un nuevo cliente se ha conectado y comunica el evento al resto de los usuarios mediante la función `broadcast()`. Esto permite que todos conozcan cuándo un nuevo integrante ingresa al chat.
+Una vez autenticado el usuario, el servidor informa por consola que un nuevo cliente se ha conectado y comunica el evento al resto de los usuarios mediante la función broadcast(). Esto permite que todos conozcan cuándo un nuevo integrante ingresa al chat.
 
 
 Recepción continua de mensajes
@@ -91,7 +91,6 @@ Explicacion:
 
 El servidor permanece escuchando continuamente los mensajes enviados por ese cliente. El ciclo infinito mantiene la comunicación activa hasta que el usuario se desconecta. Cada mensaje recibido se convierte desde bytes a texto para poder procesarlo.
 
----
 
 Detección de comandos
 
@@ -101,7 +100,7 @@ if mensaje.startswith("/"):
 
 Explicacion:
 
-Antes de procesar un mensaje, el servidor verifica si comienza con el carácter `/`. Esto permite distinguir entre un comando del sistema y un mensaje común del chat. Esta técnica simplifica la incorporación de nuevas funcionalidades sin interferir con la comunicación normal entre usuarios.
+Antes de procesar un mensaje, el servidor verifica si comienza con el carácter “/”. Esto permite distinguir entre un comando del sistema y un mensaje común del chat. Esta técnica simplifica la incorporación de nuevas funcionalidades sin interferir con la comunicación normal entre usuarios.
 
 
 Comando /usuarios
@@ -333,3 +332,4 @@ hilo_escribir.start()
 Explicacion:
 
 El cliente crea dos hilos independientes. Uno permanece escuchando continuamente los mensajes enviados por el servidor, mientras que el otro permite al usuario escribir nuevos mensajes. Gracias a esta separación, el cliente puede enviar y recibir información simultáneamente sin que una tarea bloquee a la otra.
+
