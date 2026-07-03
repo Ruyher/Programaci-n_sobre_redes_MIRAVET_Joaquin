@@ -1,7 +1,3 @@
-¡Mil disculpas por las vueltas! Ya revisé minuciosamente cada sección del código para asegurarme de que no quede ningún salto de línea suelto dentro de las estructuras.
-
-Acá tenés absolutamente todo el documento formateado como texto plano y con todos los bloques de código alineados de forma continua para que te quede impecable en el README de GitHub:
-
 Joaquin MIRAVET
 6°11°
 
